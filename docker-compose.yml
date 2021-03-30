@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  keycloak:
+    build: .
+    container_name: keycloak
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin1234
+      - JAVA_OPTS=$JAVA_OPTS -Xms2048m -Xmx2048m
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - 8025:8025
+      - 1025:1025
+  keycloak-config-script:
+    image: cfmanteiga/alpine-bash-curl-jq
+    container_name: keycloak-config-script
+    volumes:
+      - ./kcconf.sh:/tmp/kcconf.sh
+    entrypoint: >
+      sh -c "sh /tmp/kcconf.sh"
