@@ -1,6 +1,9 @@
 # keycloak-update-email-with-verification
 Keycloak Update Email with Verification
 
+This is an example of an implementation of email verify before changing 
+using Keycloak's Application Initiated Actions (AIA).
+
 ## How to build
 ```
 ./mvnw clean package
@@ -23,3 +26,8 @@ Keycloak Update Email with Verification
 Note:
 It is possible to change the combination of `client_id` and `redirect_uri` to redirect to the URI of your choice.
 (The URI you want to redirect to must be allowed in [Valid Redirect URIs] in the [Clients] settings.)
+
+### References
+
+* https://github.com/keycloak/keycloak-community/blob/master/design/application-initiated-actions.md
+* https://issues.redhat.com/browse/KEYCLOAK-6455?focusedCommentId=14396704&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-14396704
