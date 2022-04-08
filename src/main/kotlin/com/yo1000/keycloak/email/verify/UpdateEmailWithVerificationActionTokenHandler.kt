@@ -1,6 +1,6 @@
 package com.yo1000.keycloak.email.verify
 
-import org.keycloak.authentication.actiontoken.AbstractActionTokenHander
+import org.keycloak.authentication.actiontoken.AbstractActionTokenHandler
 import org.keycloak.authentication.actiontoken.ActionTokenContext
 import org.keycloak.events.Errors
 import org.keycloak.events.EventType
@@ -14,7 +14,7 @@ import javax.ws.rs.core.Cookie
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.UriInfo
 
-class UpdateEmailWithVerificationActionTokenHandler : AbstractActionTokenHander<UpdateEmailWithVerificationActionToken>(
+class UpdateEmailWithVerificationActionTokenHandler : AbstractActionTokenHandler<UpdateEmailWithVerificationActionToken>(
         UpdateEmailWithVerificationActionToken.TOKEN_TYPE,
         UpdateEmailWithVerificationActionToken::class.java,
         Messages.STALE_VERIFY_EMAIL_LINK,

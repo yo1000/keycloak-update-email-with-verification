@@ -1,4 +1,4 @@
-FROM jboss/keycloak:12.0.4
+FROM quay.io/keycloak/keycloak:17.0.1-legacy
 
 RUN mkdir -p /opt/jboss/keycloak/providers
 ADD target/keycloak-update-email-with-verification.jar /opt/jboss/keycloak/providers/keycloak-update-email-with-verification.jar
