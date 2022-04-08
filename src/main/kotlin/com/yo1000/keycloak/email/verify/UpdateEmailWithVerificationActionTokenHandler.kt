@@ -10,11 +10,7 @@ import org.keycloak.models.KeycloakSession
 import org.keycloak.models.RealmModel
 import org.keycloak.services.messages.Messages
 import org.keycloak.sessions.AuthenticationSessionModel
-import org.keycloak.userprofile.UserProfile
-import org.keycloak.userprofile.profile.UserProfileContextFactory
-import org.keycloak.userprofile.utils.UserUpdateHelper
 import javax.ws.rs.core.Cookie
-import javax.ws.rs.core.MultivaluedHashMap
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.UriInfo
 
@@ -40,15 +36,9 @@ class UpdateEmailWithVerificationActionTokenHandler : AbstractActionTokenHander<
         val oldEmail: String = token.oldEmail
                 ?: throw TokenVerificationException(token, "Old email linked to token does not exist")
 
-        val userProfile: UserProfile = UserProfileContextFactory.forUpdateProfile(
-                user,
-                MultivaluedHashMap<String, String>(mapOf(
-                        "email" to newEmail
-                )),
-                keycloakSession
-        ).validate().profile
+        // Update Email
+        user.email = newEmail
 
-        UserUpdateHelper.updateUserProfile(realm, user, userProfile)
         keycloakSession.userCache().evict(realm, user)
 
         event.clone().event(EventType.UPDATE_EMAIL)
